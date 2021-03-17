@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Sonarqube') {
             steps {
-                sh './gradlew sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.projectKey=testGradle -Dsonar.junit.reportPaths=./build/test-results/test -Dsonar.binaries=./build/classes'
+                sh './gradlew sonarqube -Dsonar.host.url=http://sonarqube-article:9000 -Dsonar.projectKey=testGradle -Dsonar.junit.reportPaths=./build/test-results/test -Dsonar.binaries=./build/classes'
             }
         }
     }

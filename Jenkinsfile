@@ -15,7 +15,7 @@ pipeline {
                     archiveArtifacts artifacts: '**/build/**/*.jar', fingerprint: true
                 }
             }
-         }
+        }
 		stage ('Test') {
         	steps {
         		sh './gradlew test'
@@ -25,12 +25,10 @@ pipeline {
                     junit 'build/test-results/**/*.xml'
                 }
             }
-         }
+        }
         stage('Sonarqube') {
             steps {
                  sh 'gradle --info sonarqube  -Dsonar.projectKey=testGradle -Dsonar.junit.reportPaths=./build/test-results/test -Dsonar.binaries=./build/classes'
-                }
             }
         }
-    }
 }

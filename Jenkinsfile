@@ -3,7 +3,6 @@ pipeline {
 
     tools {
         gradle 'gradle'
-        sonarqube 'Sonar'
     }
 
     stages {
@@ -29,7 +28,9 @@ pipeline {
         }
         stage('Sonarqube') {
             steps {
-                sh './gradlew sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.projectKey=testGradle -Dsonar.junit.reportPaths=./build/test-results/test -Dsonar.binaries=./build/classes'
+                withSonarQubeEnv('Sonar') {
+                    sh './gradlew sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.projectKey=testGradle -Dsonar.junit.reportPaths=./build/test-results/test -Dsonar.binaries=./build/classes'
+                }
             }
         }
     }

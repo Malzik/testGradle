@@ -26,5 +26,15 @@ pipeline {
                 }
             }
          }
+        stage('Sonarqube') {
+            steps {
+                withSonarQubeEnv('sonar.tools.****') {
+                script {
+                   cmd.withNexusCredentials {
+                          sh 'gradle --info sonarqube  -Dsonar.projectKey=testGradle -Dsonar.junit.reportPaths=./build/test-results/test -Dsonar.binaries=./build/classes'
+                   }
+                }
+            }
+        }
     }
 }
